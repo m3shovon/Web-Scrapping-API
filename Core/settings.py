@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'App_Scrapping',
     'rest_framework',
+    'django_filters',
     # 'rest_framework_templates',
 
 ]
