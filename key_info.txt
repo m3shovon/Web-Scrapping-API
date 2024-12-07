@@ -1,0 +1,13 @@
+1. Backend Design
+2. Cross Site Scripting
+3. redirects all non-HTTPS requests to HTTP
+3. Postgresql Database and environment file 
+4. User signup and signin
+5. Lockdown the entire Site
+6. Sending Email
+7. Sending Message using Chat
+8. Site Auto Logout
+9. Site Lockdown
+10. Simple history tracker
+11. Authenticate Using Email
+

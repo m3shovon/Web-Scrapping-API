@@ -1,0 +1,6 @@
+django 
+djangorestframework 
+sentence-transformers 
+faiss-cpu 
+requests 
+beautifulsoup4
