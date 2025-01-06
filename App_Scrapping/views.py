@@ -78,7 +78,6 @@ class ScrapeWebsiteView(APIView):
         if visited is None:
             visited = set()
 
-        # Avoid revisiting the same URL
         if url in visited or ScrapedData.objects.filter(url=url).exists():
             return []
 
@@ -90,11 +89,9 @@ class ScrapeWebsiteView(APIView):
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
 
-            # Extract data from the current page
             title = soup.title.string if soup.title else "No title"
             content = soup.get_text(strip=True)
 
-            # Save the data in the database
             scraped_instance, created = ScrapedData.objects.get_or_create(
                 url=url,
                 defaults={
@@ -103,7 +100,6 @@ class ScrapeWebsiteView(APIView):
                 }
             )
 
-            # Add data to the response
             if created: 
                 scraped_data.append({
                     'url': scraped_instance.url,
@@ -111,11 +107,9 @@ class ScrapeWebsiteView(APIView):
                     'content': scraped_instance.content,
                 })
 
-            # Find all internal links and scrape them
             for link in soup.find_all('a', href=True):
                 next_url = urljoin(url, link['href'])
 
-                # Ensure the link is in the same domain
                 if urlparse(next_url).netloc == urlparse(url).netloc:
                     scraped_data.extend(self.scrape_website(next_url, visited))
 
